@@ -1,0 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+<input type="password" [formControlName]="'password'" />
+<input type="password" [formControlName]="'confirm_password'" />
+<p *ngIf="form.get('confirm_password').hasError('passwordEqualsError')"> Contraseña no coincide </p>
+<input type="submit" value="Enviar" />
+</form>
