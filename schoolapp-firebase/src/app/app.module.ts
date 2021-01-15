@@ -11,11 +11,18 @@ import { environment } from 'src/environments/environment';
 import { StudentsService } from './services/students.service';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { StudentCreateEditDialogComponent } from './components/student-create-edit-dialog/student-create-edit-dialog.component';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentsListComponent
+    StudentsListComponent,
+    StudentCreateEditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +30,20 @@ import {MatTableModule} from '@angular/material/table';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
-  providers: [StudentsService],
+  entryComponents: [
+    StudentCreateEditDialogComponent
+  ],
+  providers: [
+    StudentsService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
