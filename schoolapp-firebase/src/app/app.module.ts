@@ -17,12 +17,16 @@ import { StudentCreateEditDialogComponent } from './components/student-create-ed
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthLoginComponent } from './components/auth-login/auth-login.component';
+import { AuthService } from './services/auth.service';
+import { AngularFireAuthModule } from "@angular/fire/auth";
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsListComponent,
-    StudentCreateEditDialogComponent
+    StudentCreateEditDialogComponent,
+    AuthLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
@@ -42,6 +47,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     StudentsService,
+    AuthService,
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ],
   bootstrap: [AppComponent]

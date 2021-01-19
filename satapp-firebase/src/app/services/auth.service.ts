@@ -20,6 +20,11 @@ export class AuthService {
       const provider = new firebase.auth.GoogleAuthProvider();
       return this.afAuth.signInWithPopup(provider).then((result) => {
         console.log(result);
+        const perfilUsuarioLogueado = result.additionalUserInfo.profile;
+        const {email = "", family_name: apellidos = "", given_name: nombre = "", picture: foto = ""} = perfilUsuarioLogueado || {};
+
+        this.afs.collection
+
       }).catch((error) => {
         window.alert(error)
       });
