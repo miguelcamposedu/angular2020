@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router'; 
 import firebase from 'firebase/app';
+import { User } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,24 @@ export class AuthService {
 
     googleAuth() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      return this.afAuth.signInWithPopup(provider).then((result) => {
-        console.log(result);
-        const perfilUsuarioLogueado = result.additionalUserInfo.profile;
-        const {email = "", family_name: apellidos = "", given_name: nombre = "", picture: foto = ""} = perfilUsuarioLogueado || {};
+      return this.afAuth.signInWithPopup(provider).then(result => {
+        console.log(result.user);
+        const {email = "", displayName: name = "", photoURL: foto = "", uid = "" } = result.user || {};
 
-        this.afs.collection
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${uid}`);
+        const userData: User = {
+          email: email,
+          displayName: name,
+          photoURL: foto
+        }
+        userRef.set(userData, {merge: true });
+
+        localStorage.setItem('uid', uid);
+        localStorage.setItem('email', email);
+        localStorage.setItem('displayName', name);
+        localStorage.setItem('photoURL', foto);
+
+        this.router.navigate(['incidencias']);
 
       }).catch((error) => {
         window.alert(error)

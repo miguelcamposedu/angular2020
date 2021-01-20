@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Incidencia } from 'src/app/models/incidencia.model';
 import { IncidenciasService } from 'src/app/services/incidencias.service';
+import { AddIncidenciaDialogComponent } from '../add-incidencia-dialog/add-incidencia-dialog.component';
 
 @Component({
   selector: 'app-incidencias-listado',
@@ -13,7 +15,7 @@ export class IncidenciasListadoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'description', 'priority', 'created'];
   dataSource = new MatTableDataSource();
   
-  constructor(private incidenciasService: IncidenciasService) { }
+  constructor(private incidenciasService: IncidenciasService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.incidenciasService.getIncidencias().subscribe(resp => {
@@ -24,6 +26,13 @@ export class IncidenciasListadoComponent implements OnInit {
         } as Incidencia;
       });
       this.dataSource.data = this.listadoIncidencias;
+    });
+  }
+
+  addIncidencia() {
+    let dialogRef = this.dialog.open(AddIncidenciaDialogComponent, {
+      height: '400px',
+      width: '600px',
     });
   }
 

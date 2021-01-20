@@ -14,12 +14,16 @@ import { IncidenciasListadoComponent } from './components/incidencias-listado/in
 import {MatTableModule} from '@angular/material/table';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { AuthService } from './services/auth.service';
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import { AddIncidenciaDialogComponent } from './components/add-incidencia-dialog/add-incidencia-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IncidenciasListadoComponent,
-    AuthLoginComponent
+    AuthLoginComponent,
+    AddIncidenciaDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +32,14 @@ import { AuthService } from './services/auth.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatButtonModule
   ],
-  providers: [IncidenciasService, AuthService],
+  entryComponents: [
+    AddIncidenciaDialogComponent
+  ],
+  providers: [IncidenciasService, AuthService, {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
