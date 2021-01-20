@@ -33,6 +33,20 @@ export class IncidenciasListadoComponent implements OnInit {
     let dialogRef = this.dialog.open(AddIncidenciaDialogComponent, {
       height: '400px',
       width: '600px',
+      data: { 
+        title: 'Nueva incidencia',
+        actionEdit: false
+      },
+    });
+  }
+
+  updateIncidencia(incidenciaToUpdate: Incidencia) {
+    let dialogRef = this.dialog.open(AddIncidenciaDialogComponent, {
+      data: { 
+        title: 'Editando incidencia',
+        actionEdit: true,
+        incidencia: incidenciaToUpdate
+      }
     });
   }
 

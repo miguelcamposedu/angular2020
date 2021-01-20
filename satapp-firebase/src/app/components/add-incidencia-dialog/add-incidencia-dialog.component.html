@@ -1,1 +1,25 @@
-<p>add-incidencia-dialog works!</p>
+
+<form [formGroup]="incidenciaForm">
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title">
+        </mat-form-field>
+        <br/>
+        <mat-form-field appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <input matInput formControlName="description">
+        </mat-form-field>
+        <br/>
+        <mat-form-field appearance="fill">
+            <mat-label>Prioridad</mat-label>
+            <input type="number" matInput formControlName="priority" min="1" max="10">
+        </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancelar</button>
+  <button mat-button (click)="onSaveClick()">Guardar</button>
+</div>
+</form>
