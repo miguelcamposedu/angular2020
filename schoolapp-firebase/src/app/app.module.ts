@@ -20,13 +20,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthLoginComponent } from './components/auth-login/auth-login.component';
 import { AuthService } from './services/auth.service';
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { ProfileComponent } from './components/profile/profile.component';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsListComponent,
     StudentCreateEditDialogComponent,
-    AuthLoginComponent
+    AuthLoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PasswordStrengthMeterModule
   ],
   entryComponents: [
     StudentCreateEditDialogComponent

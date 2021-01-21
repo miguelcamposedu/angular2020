@@ -31,8 +31,6 @@ export class IncidenciasListadoComponent implements OnInit {
 
   addIncidencia() {
     let dialogRef = this.dialog.open(AddIncidenciaDialogComponent, {
-      height: '400px',
-      width: '600px',
       data: { 
         title: 'Nueva incidencia',
         actionEdit: false

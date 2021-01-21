@@ -1,0 +1,9 @@
+<form [formGroup]="form">
+    <label>
+      Password:
+      <input type="text" formControlName="password">
+    </label>
+    <password-strength-meter [password]="password"></password-strength-meter>
+</form>
+
+

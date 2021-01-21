@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Student } from 'src/app/models/student.class';
 import { StudentsService } from 'src/app/services/students.service';
 import { StudentCreateEditDialogComponent } from '../student-create-edit-dialog/student-create-edit-dialog.component';
@@ -15,7 +16,11 @@ export class StudentsListComponent implements OnInit {
   dataSource = new MatTableDataSource<Student>();
   displayedColumns: string[] = ['first-name', 'last-name', 'age', 'course', 'created', 'actions'];
 
-  constructor(private studensService: StudentsService, public dialog: MatDialog) { }
+  constructor(
+    private studensService: StudentsService, 
+    public dialog: MatDialog,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.studensService.getStudents().subscribe(resp => {
@@ -45,6 +50,10 @@ export class StudentsListComponent implements OnInit {
     let dialogRef = this.dialog.open(StudentCreateEditDialogComponent, {
       data: { title: 'New student', buttonText: 'Create' },
     });
+  }
+
+  goToProfile() {
+    this.router.navigate(['profile']);
   }
 
 }

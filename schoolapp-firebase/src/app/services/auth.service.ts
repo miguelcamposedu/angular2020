@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import { User } from '../models/user.interface';
 
@@ -11,7 +12,9 @@ const usersCollection = 'users';
 })
 export class AuthService {
 
-  constructor(private afAuth: AngularFireAuth, private afStore: AngularFirestore) { }
+  constructor(private afAuth: AngularFireAuth, 
+    private afStore: AngularFirestore,
+    private router: Router) { }
 
   googleAuth() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -28,8 +31,13 @@ export class AuthService {
       name: user.displayName,
       photo: user.photoURL
     }
-    return userRef.set(userData, {
+    userRef.set(userData, {
       merge: true
-    })
+    });
+
+    // Guardar los datos del usuario logueado
+    
+
+    this.router.navigate(['students']);
   }
 }
