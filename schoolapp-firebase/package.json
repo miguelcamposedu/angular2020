@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~11.0.3",
     "@angular/router": "~11.0.3",
     "angular-password-strength-meter": "^3.0.1",
+    "bcryptjs": "^2.4.3",
     "firebase": "^8.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

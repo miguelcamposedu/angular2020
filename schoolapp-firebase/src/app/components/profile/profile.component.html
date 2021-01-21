@@ -3,7 +3,9 @@
       Password:
       <input type="text" formControlName="password">
     </label>
-    <password-strength-meter [password]="password"></password-strength-meter>
+    <password-strength-meter [password]="password" [enableFeedback]="true" (strengthChange)="onPasswordStrengthChanged($event)"></password-strength-meter>
+    <button mat-raised-button color="primary" (click)="savePassword()" *ngIf="ifSafePassword()">
+        <mat-icon>add</mat-icon> Guardar contraseña</button>
 </form>
 
 

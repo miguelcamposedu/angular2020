@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import { User } from '../models/user.interface';
+import * as bcryptjs from 'bcryptjs';
 
 const usersCollection = 'users';
 
@@ -36,7 +37,8 @@ export class AuthService {
     });
 
     // Guardar los datos del usuario logueado
-    
+    localStorage.setItem('uid', user.uid);
+    localStorage.setItem('photo', user.photoURL);
 
     this.router.navigate(['students']);
   }
